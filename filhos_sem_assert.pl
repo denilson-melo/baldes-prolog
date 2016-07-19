@@ -6,6 +6,10 @@
 % Onde [] é uma lista vazia que será utilizada para formar o caminho,
 % e C irá guardar o caminho final.
 
+% Caso o nó buscado tenha muitos elementos, o prolog irá exibir a lista de nós resumida, para
+% mostrar completamente o caminho basta pressionar 'w'. 
+% A documentação do prolog fala sobre esta abreviação: http://www.swi-prolog.org/FAQ/AllOutput.html
+
 :-dynamic(destino/2).
 
 passa_a_b(A, B, A2, B2):- A+B < 4, A2 is 0, B2 is A+B.
@@ -24,3 +28,5 @@ filhos(A, B, A2, B2, CAMINHO, CAMINHO_FINAL):- A2 is 0, B2 is B, diferentes(A, B
 filhos(A, B, A2, B2, CAMINHO, CAMINHO_FINAL):- A2 is A, B2 is 0, diferentes(A, B, A2, B2), caminho(A2, B2, CAMINHO, CAMINHO_FINAL).
 filhos(A, B, A2, B2, CAMINHO, CAMINHO_FINAL):- passa_a_b(A, B, A2, B2), diferentes(A, B, A2, B2), caminho(A2, B2, CAMINHO, CAMINHO_FINAL).
 filhos(A, B, A2, B2, CAMINHO, CAMINHO_FINAL):- passa_b_a(A, B, A2, B2), diferentes(A, B, A2, B2), caminho(A2, B2, CAMINHO, CAMINHO_FINAL).
+
+% Para cada execução subsequente é necessário limpar o ambiente de execução
